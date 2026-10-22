@@ -1,4 +1,4 @@
-# IncidentMind AI — Backend Dependencies
+# Fault IQ — Backend Dependencies
 # Python 3.11 compatible
 
 # --- Web framework ---

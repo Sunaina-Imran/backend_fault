@@ -1,5 +1,5 @@
 """
-IncidentMind AI — FastAPI Application Entry Point.
+Fault IQ — FastAPI Application Entry Point.
 """
 
 from fastapi import FastAPI
@@ -11,7 +11,7 @@ from app.schemas.health import RootResponse
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version=settings.VERSION,
-    description="IncidentMind AI — Incident detection, severity prediction, root-cause analysis, and remediation recommendations.",
+    description="Fault IQ — Incident detection, severity prediction, root-cause analysis, and remediation recommendations.",
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",

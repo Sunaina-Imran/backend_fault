@@ -1,8 +1,8 @@
 """
-IncidentMind AI — Central Model Registration Module.
+Fault IQ — Central Model Registration Module.
 
 Imports all SQLAlchemy models so that their Table definitions are registered
-with Base.metadata. Alembic will import Base.metadata from this package in Step 5.
+with Base.metadata. Alembic imports Base.metadata from this package.
 """
 
 from app.db.base import Base

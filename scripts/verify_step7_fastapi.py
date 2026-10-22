@@ -1,5 +1,5 @@
 """
-Step 7 Verification Script — IncidentMind AI FastAPI Application & Health Endpoint.
+Step 7 Verification Script — Fault IQ FastAPI Application & Health Endpoint.
 
 Validates:
 1. Module imports and FastAPI application instance creation.

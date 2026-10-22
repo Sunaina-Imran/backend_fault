@@ -1,5 +1,5 @@
 """
-IncidentMind AI — Health and Status Schemas.
+Fault IQ — Health and Status Schemas.
 """
 
 from pydantic import BaseModel, Field
@@ -36,7 +36,7 @@ class RootResponse(BaseModel):
     service: str = Field(
         ...,
         description="Name of the service.",
-        examples=["IncidentMind AI"],
+        examples=["Fault IQ"],
     )
     version: str = Field(
         ...,

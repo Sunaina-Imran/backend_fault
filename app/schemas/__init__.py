@@ -1,5 +1,5 @@
 """
-IncidentMind AI — Pydantic Schemas Package.
+Fault IQ — Pydantic Schemas Package.
 """
 
 from app.schemas.health import HealthResponse, RootResponse

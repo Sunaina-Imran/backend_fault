@@ -1,5 +1,5 @@
 """
-Step 4 Verification Script — IncidentMind AI Database Layer.
+Step 4 Verification Script — Fault IQ Database Layer.
 
 Validates:
 1. Python module imports and compilation.

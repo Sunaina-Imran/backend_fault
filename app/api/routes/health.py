@@ -1,5 +1,5 @@
 """
-IncidentMind AI — Health Check Route.
+Fault IQ — Health Check Route.
 
 Provides database-aware health verification using SQLAlchemy engine.
 Guarantees connection release, zero credential leakage, and appropriate HTTP status.

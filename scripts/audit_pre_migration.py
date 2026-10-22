@@ -1,5 +1,5 @@
 """
-Pre-Migration Audit Script for IncidentMind AI Step 5.
+Pre-Migration Audit Script for Fault IQ Step 5.
 Validates:
 1. Presence/absence of target tables in Supabase public schema.
 2. Metadata vs. Migration script consistency.

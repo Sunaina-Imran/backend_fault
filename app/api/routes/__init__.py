@@ -1,5 +1,5 @@
 """
-IncidentMind AI — API Routes Package.
+Fault IQ — API Routes Package.
 """
 
 from app.api.routes.health import router as health_router

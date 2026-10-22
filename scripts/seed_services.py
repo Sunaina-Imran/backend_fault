@@ -1,5 +1,5 @@
 """
-Step 6 Seed Script — IncidentMind AI: Seed Initial Services in Supabase.
+Step 6 Seed Script — Fault IQ: Seed Initial Services in Supabase.
 
 Seeds the 5 initial core microservices:
 - gateway
