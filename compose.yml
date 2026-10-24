@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: fault-iq-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-faultiq}
+      POSTGRES_USER: ${POSTGRES_USER:-faultiq}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local_dev_password_change_me}
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - fault_iq_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+    mem_limit: 512m
+
+  backend:
+    build: .
+    image: fault-iq-backend:latest
+    container_name: fault-iq-backend
+    env_file:
+      - .env.docker
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    mem_limit: 512m
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.120.0
+    container_name: fault-iq-otel-collector
+    command: ["--config=/etc/otelcol-contrib/collector.yml"]
+    volumes:
+      - ./observability/collector.yml:/etc/otelcol-contrib/collector.yml:ro
+      - ../data/raw:/data/raw
+    ports:
+      - "127.0.0.1:4317:4317"
+      - "127.0.0.1:4318:4318"
+      - "127.0.0.1:13133:13133"
+    restart: unless-stopped
+    mem_limit: 256m
+
+volumes:
+  fault_iq_postgres_data:
