@@ -1,0 +1,38 @@
+
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    - cron: "17 2,10,18 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Supabase connection
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+
+        run: |
+          echo "Checking Supabase connection..."
+
+          response=$(curl --silent --show-error \
+            --get "$SUPABASE_URL/rest/v1/services" \
+            --data-urlencode "select=id" \
+            --data-urlencode "limit=1" \
+            -H "apikey: $SUPABASE_KEY" \
+            -H "Authorization: Bearer $SUPABASE_KEY" \
+            -w "\n%{http_code}")
+
+          status=$(echo "$response" | tail -n 1)
+
+          if [ "$status" -ge 200 ] && [ "$status" -lt 300 ]; then
+            echo "Supabase connection successful!"
+          else
+            echo "Supabase request failed with HTTP $status"
+            exit 1
+          fi
