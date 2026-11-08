@@ -14,7 +14,7 @@ jobs:
       - name: Check Supabase connection
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_KEY }}
         run: |
           set -e
 
