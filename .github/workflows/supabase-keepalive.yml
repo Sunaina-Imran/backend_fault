@@ -1,0 +1,39 @@
+
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Supabase connection
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+        run: |
+          set -e
+
+          echo "Checking Supabase connection..."
+
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_SECRET_KEY" ]; then
+            echo "Error: Required GitHub secrets are missing."
+            exit 1
+          fi
+
+          HTTP_CODE=$(curl -sS -o /tmp/supabase-response.txt \
+            -w "%{http_code}" \
+            "$SUPABASE_URL/rest/v1/services?select=id&limit=1" \
+            -H "apikey: $SUPABASE_SECRET_KEY")
+
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            echo "Success! Supabase connection is working."
+          else
+            echo "Supabase request failed. HTTP: $HTTP_CODE"
+            cat /tmp/supabase-response.txt
+            exit 1
+          fi
